@@ -1,1 +1,3 @@
-ECHO is on.
+module.exports = {
+    reactStrictMode: true,
+  };
