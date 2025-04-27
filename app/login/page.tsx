@@ -1,18 +1,18 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";  // Proveri da li si ovo ispravno uveo
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const router = useRouter();
+  const router = useRouter(); // Ovdje se koristi, proveri da li se koristi ispravno
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();  // Sprečava osvežavanje stranice
+    e.preventDefault();
 
-    console.log("Submitting login form...");  // Dodajemo log za debugovanje
+    console.log("Submitting login form...");
 
     const res = await fetch("/api/login", {
       method: "POST",
@@ -24,15 +24,13 @@ export default function Login() {
 
     if (res.ok) {
       console.log("Login successful! Redirecting...");
-      // Koristimo useEffect za preusmeravanje na dashboard
-      router.push("/dashboard"); // Prebacivanje na dashboard
+      router.push("/dashboard"); // Ovo bi trebalo da funkcioniše
     } else {
-      console.log("Login failed", data);  // Log greške
+      console.log("Login failed", data);
       setError(data.message);
     }
   };
 
-  // useEffect je tu da se osigura da se navigacija uradi samo klijentski
   useEffect(() => {
     if (error) {
       console.log("Greška prilikom logovanja: ", error);
@@ -43,22 +41,22 @@ export default function Login() {
     <main className="flex min-h-screen flex-col items-center justify-center p-8">
       <h1 className="text-3xl font-bold mb-6">Login</h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-80">
-        <label htmlFor="email" className="sr-only">Email</label> {/* Dodajemo label sa htmlFor */}
+        <label htmlFor="email" className="sr-only">Email</label>
         <input
           type="email"
-          id="email"  // Dodajemo id za form polje
-          name="email"  // Dodajemo name za polje
+          id="email"
+          name="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           className="border p-2 rounded"
           required
         />
-        <label htmlFor="password" className="sr-only">Password</label> {/* Dodajemo label sa htmlFor */}
+        <label htmlFor="password" className="sr-only">Password</label>
         <input
           type="password"
-          id="password"  // Dodajemo id za polje
-          name="password"  // Dodajemo name za polje
+          id="password"
+          name="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
