@@ -10,7 +10,9 @@ export default function Login() {
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault();  // Sprečava osvežavanje stranice
+
+    console.log("Submitting login form...");  // Dodajemo log za debugovanje
 
     const res = await fetch("/api/login", {
       method: "POST",
@@ -21,8 +23,10 @@ export default function Login() {
     const data = await res.json();
 
     if (res.ok) {
-      router.push("/dashboard");
+      console.log("Login successful! Redirecting...");
+      router.push("/dashboard"); // Prebacivanje na dashboard
     } else {
+      console.log("Login failed", data);  // Log greške
       setError(data.message);
     }
   };
