@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 export default function Login() {
@@ -24,12 +24,20 @@ export default function Login() {
 
     if (res.ok) {
       console.log("Login successful! Redirecting...");
+      // Koristimo useEffect za preusmeravanje na dashboard
       router.push("/dashboard"); // Prebacivanje na dashboard
     } else {
       console.log("Login failed", data);  // Log greške
       setError(data.message);
     }
   };
+
+  // useEffect je tu da se osigura da se navigacija uradi samo klijentski
+  useEffect(() => {
+    if (error) {
+      console.log("Greška prilikom logovanja: ", error);
+    }
+  }, [error]);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-8">
