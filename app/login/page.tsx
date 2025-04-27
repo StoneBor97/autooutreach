@@ -43,16 +43,22 @@ export default function Login() {
     <main className="flex min-h-screen flex-col items-center justify-center p-8">
       <h1 className="text-3xl font-bold mb-6">Login</h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-80">
+        <label htmlFor="email" className="sr-only">Email</label> {/* Dodajemo label sa htmlFor */}
         <input
           type="email"
+          id="email"  // Dodajemo id za form polje
+          name="email"  // Dodajemo name za polje
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           className="border p-2 rounded"
           required
         />
+        <label htmlFor="password" className="sr-only">Password</label> {/* Dodajemo label sa htmlFor */}
         <input
           type="password"
+          id="password"  // Dodajemo id za polje
+          name="password"  // Dodajemo name za polje
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
